@@ -27,3 +27,7 @@ input.defaultCheckbox::before {
 input:checked.defaultCheckbox::before {
   opacity: 1;
 }
+
+.background-image-organ-form {
+  background-image: url("assets/img/organ-form.avif");
+}

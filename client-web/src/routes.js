@@ -18,10 +18,11 @@ import {
   MdLock,
 } from "react-icons/md";
 import SignUp from "views/auth/Signup";
+import OrganForm from "views/OrganForm";
 
 const routes = [
   {
-    name: "Main Dashboard",
+    name: "Dashboard",
     layout: "/admin",
     path: "default",
     icon: <MdHome className="h-6 w-6" />,
@@ -48,6 +49,13 @@ const routes = [
     path: "profile",
     icon: <MdPerson className="h-6 w-6" />,
     component: <Profile />,
+  },
+  {
+    name: "Organ Form",
+    layout: "/admin",
+    path: "organ-form",
+    icon: <MdPerson className="h-6 w-6" />,
+    component: <OrganForm />,
   },
   {
     name: "Sign In",

@@ -11,10 +11,18 @@ import {
   IoMdInformationCircleOutline,
 } from "react-icons/io";
 import avatar from "assets/img/avatars/avatar4.png";
+import { useAuth } from "context/auth-context";
 
 const Navbar = (props) => {
   const { onOpenSidenav, brandText } = props;
   const [darkmode, setDarkmode] = React.useState(false);
+
+  const { setCurrentUser, setUserRole } = useAuth();
+
+  const logUserOut = () => {
+    setCurrentUser("");
+    setUserRole("");
+  };
 
   return (
     <nav className="sticky top-4 z-40 flex flex-row flex-wrap items-center justify-between rounded-xl bg-white/10 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
@@ -189,7 +197,7 @@ const Navbar = (props) => {
               <div className="p-4">
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-bold text-navy-700 dark:text-white">
-                    👋 Hey, Adela
+                    👋 Hey, User
                   </p>{" "}
                 </div>
               </div>
@@ -211,6 +219,7 @@ const Navbar = (props) => {
                 <a
                   href="/auth/sign-in"
                   className="mt-3 text-sm font-medium text-red-500 hover:text-red-500"
+                  onClick={logUserOut}
                 >
                   Log Out
                 </a>

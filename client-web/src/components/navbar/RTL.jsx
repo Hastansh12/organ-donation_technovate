@@ -88,10 +88,10 @@ const Navbar = (props) => {
                   <BsArrowBarUp />
                 </div>
                 <div className="flex h-full w-full flex-col justify-center rounded-lg px-1 text-sm ms-2">
-                  <p className="mb-1 text-base font-bold text-gray-900 text-start dark:text-white">
+                  <p className="mb-1 text-start text-base font-bold text-gray-900 dark:text-white">
                     New Update: Horizon UI Dashboard PRO
                   </p>
-                  <p className="font-base text-xs text-gray-900 text-start dark:text-white">
+                  <p className="font-base text-start text-xs text-gray-900 dark:text-white">
                     A new update for your downloaded item is available!
                   </p>
                 </div>
@@ -102,17 +102,19 @@ const Navbar = (props) => {
                   <BsArrowBarUp />
                 </div>
                 <div className="flex h-full w-full flex-col justify-center rounded-lg px-1 text-sm ms-2">
-                  <p className="mb-1 text-base font-bold text-gray-900 text-start dark:text-white">
+                  <p className="mb-1 text-start text-base font-bold text-gray-900 dark:text-white">
                     New Update: Horizon UI Dashboard PRO
                   </p>
-                  <p className="font-base text-xs text-gray-900 text-start dark:text-white">
+                  <p className="font-base text-start text-xs text-gray-900 dark:text-white">
                     A new update for your downloaded item is available!
                   </p>
                 </div>
               </button>
             </div>
           }
-          classNames={"py-2 top-4 left-0 -start-[230px] md:-start-[440px] w-max"}
+          classNames={
+            "py-2 top-4 left-0 -start-[230px] md:-start-[440px] w-max"
+          }
         />
         {/* start Horizon PRO */}
         <Dropdown
@@ -154,7 +156,9 @@ const Navbar = (props) => {
               </a>
             </div>
           }
-          classNames={"py-2 top-6 left-0 -start-[250px] md:-start-[330px] w-max"}
+          classNames={
+            "py-2 top-6 left-0 -start-[250px] md:-start-[330px] w-max"
+          }
           animation="origin-[75%_0%] md:origin-top-end transition-all duration-300 ease-in-out"
         />
         <div
@@ -189,7 +193,7 @@ const Navbar = (props) => {
               <div className="p-4">
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-bold text-navy-700 dark:text-white">
-                    👋 Hey, Adela
+                    👋 Hey, User
                   </p>{" "}
                 </div>
               </div>

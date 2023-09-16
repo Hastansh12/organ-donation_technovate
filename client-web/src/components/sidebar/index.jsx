@@ -2,6 +2,7 @@
 
 import { HiX } from "react-icons/hi";
 import Links from "./components/Links";
+import appLogo from "../../assets/svg/logo_organ_connect.png";
 
 import routes from "routes.js";
 
@@ -19,12 +20,19 @@ const Sidebar = ({ open, onClose }) => {
         <HiX />
       </span>
 
-      <div className={`mx-[40px] mt-[40px] flex items-center`}>
+      <div
+        className={`mx-[40px] mt-[20px] mb-[30px] flex cursor-pointer items-center`}
+      >
         <div className="mt-1 ml-1 h-2.5 font-poppins text-[24px] font-bold uppercase text-navy-700 dark:text-white">
+          <img
+            src={appLogo}
+            alt="Logo"
+            className="m-0 mx-auto mb-[10px] h-16 w-32"
+          />
           Organ Connect
         </div>
       </div>
-      <div class="mt-[58px] mb-7 h-px bg-gray-300 dark:bg-white/30" />
+      <div class="mt-[58px] mb-7 bg-gray-300 dark:bg-white/30" />
       {/* Nav item */}
 
       <ul className="mb-auto pt-1">

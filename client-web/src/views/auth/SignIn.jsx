@@ -1,8 +1,72 @@
+import React, { useState } from "react";
 import InputField from "components/fields/InputField";
 import { FcGoogle } from "react-icons/fc";
 import Checkbox from "components/checkbox";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "context/auth-context";
+import { setupAuthHeaderForNetworkCalls } from "services/SetupAuthHeaders";
+import { toast } from "react-toastify";
 
 export default function SignIn() {
+  // Define state variables for form fields
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+
+  const navigate = useNavigate();
+  const { setCurrentUser, setUserRole } = useAuth();
+
+  // Function to handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Basic email validation
+    if (!email || !email.includes("@")) {
+      setIsEmailValid(false);
+      return;
+    }
+
+    // Basic password validation (minimum 8 characters)
+    if (password.length < 8) {
+      setIsPasswordValid(false);
+      return;
+    }
+
+    if (isEmailValid && isPasswordValid) {
+      console.log(email, password);
+      try {
+        const {
+          data: { userData, token },
+        } = await axios.post(
+          `http://localhost:5000/user/userLogin`,
+          {
+            email,
+            password,
+          },
+          { withCredentials: true }
+        );
+
+        if (userData) {
+          // save the user to global state here, useReducer
+          setupAuthHeaderForNetworkCalls(token);
+          setCurrentUser(userData);
+          setUserRole(userData?.role);
+          toast.success("Logged in successfully!");
+          navigate("/admin/organ-form");
+        } else {
+          toast.error("Some error occurred!");
+        }
+      } catch (error) {
+        toast.error(error?.response?.data?.message || "Some error occurred!");
+      }
+    }
+
+    setIsEmailValid(true);
+    setIsPasswordValid(true);
+  };
+
   return (
     <div className="mt-16 mb-16 flex h-full w-full items-center justify-center px-2 md:mx-0 md:px-0 lg:mb-10 lg:items-center lg:justify-start">
       {/* Sign in section */}
@@ -21,7 +85,7 @@ export default function SignIn() {
             Sign In with Google
           </h5>
         </div>
-        <div className="mb-6 flex items-center  gap-3">
+        <div className="mb-6 flex items-center gap-3">
           <div className="h-px w-full bg-gray-200 dark:bg-navy-700" />
           <p className="text-base text-gray-600 dark:text-white"> or </p>
           <div className="h-px w-full bg-gray-200 dark:bg-navy-700" />
@@ -31,9 +95,14 @@ export default function SignIn() {
           variant="auth"
           extra="mb-3"
           label="Email*"
-          placeholder="mail@simmmple.com"
+          placeholder="johndoe@gmail.com"
           id="email"
           type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          // state={isEmailValid ? "" : "error"}
+          error={!isEmailValid}
+          errorMessage="Please enter a valid email"
         />
 
         {/* Password */}
@@ -44,6 +113,11 @@ export default function SignIn() {
           placeholder="Min. 8 characters"
           id="password"
           type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          // state={isPasswordValid ? "" : "error"}
+          error={!isPasswordValid}
+          errorMessage="Password must be at least 8 characters"
         />
         {/* Checkbox */}
         <div className="mb-4 flex items-center justify-between px-2">
@@ -60,11 +134,14 @@ export default function SignIn() {
             Forgot Password?
           </a>
         </div>
-        <button className="linear mt-2 w-full rounded-xl bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200">
+        <button
+          className="linear mt-2 w-full rounded-xl bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200"
+          onClick={handleSubmit}
+        >
           Sign In
         </button>
         <div className="mt-4">
-          <span className=" text-sm font-medium text-navy-700 dark:text-gray-600">
+          <span className="text-sm font-medium text-navy-700 dark:text-gray-600">
             Not registered yet?
           </span>
           <a

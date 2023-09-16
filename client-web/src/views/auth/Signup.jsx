@@ -6,16 +6,19 @@ import SelectField from "components/fields/SelectField"; // Import the SelectFie
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useAuth } from "context/auth-context";
+import { setupAuthHeaderForNetworkCalls } from "services/SetupAuthHeaders";
 
 export default function SignUp() {
   // States for form fields and validation
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [requirement, setRequirement] = useState("");
-  const [isEmailValid, setEmailValid] = useState(true);
-  const [isPasswordValid, setPasswordValid] = useState(true);
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
 
   const navigate = useNavigate();
+  const { setCurrentUser, setUserRole } = useAuth();
 
   // Function to handle form submission
   const handleSubmit = async (e) => {
@@ -25,36 +28,41 @@ export default function SignUp() {
     const isEmailValid = email && email.includes("@");
     const isPasswordValid = password.length >= 8;
 
-    setEmailValid(isEmailValid);
-    setPasswordValid(isPasswordValid);
+    setIsEmailValid(isEmailValid);
+    setIsPasswordValid(isPasswordValid);
 
     if (isEmailValid && isPasswordValid && requirement !== "") {
       console.log(email, password, requirement);
       try {
         const {
-          data: { userId, userRole, message },
+          data: { user, token },
         } = await axios.post(
-          `${process.env.REACT_APP_API_ENDPOINT}/user/newUser`,
+          `http://localhost:5000/user/newUser`,
           {
-            username: email,
+            email,
             password,
+            role: requirement === "donate" ? "donor" : "receiver",
           },
           { withCredentials: true }
         );
 
-        if (userId) {
+        if (user) {
           // save the user to global state here, useReducer
-          //   setCurrentUser(userId);
-          //   setUserRole(role);
+          setupAuthHeaderForNetworkCalls(token);
+          setCurrentUser(user);
+          setUserRole(user?.role);
           toast.success("Registered successfully!");
-          navigate("/");
+          navigate("/admin/organ-form");
         } else {
           toast.error("Some error occurred!");
         }
       } catch (error) {
-        toast.error(error?.response?.data?.message);
+        toast.error(error?.response?.data?.message || "Some error occurred!");
       }
     }
+
+    setIsEmailValid(true);
+    setIsPasswordValid(true);
   };
 
   return (
