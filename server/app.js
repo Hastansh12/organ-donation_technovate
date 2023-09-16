@@ -7,9 +7,9 @@ const path = require("path");
 
 //requiring routes
 const user = require("./Routes/user.routes");
-const portfolioRoutes=require('./Routes/portfolio.routes');
-const transplantRoutes=require('./Routes/transplant.routes');
-const organRoutes=require('./Routes/organ.routes');
+const portfolioRoutes = require("./Routes/portfolio.routes");
+const transplantRoutes = require("./Routes/transplant.routes");
+const organRoutes = require("./Routes/organ.routes");
 // Initializing an express app
 const app = express();
 
@@ -17,7 +17,7 @@ const app = express();
 const PORT = process.env.PORT;
 
 // Formatting incoming data and allowing cross origin requests
-app.use(cors({ origin: true }));
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
@@ -27,9 +27,9 @@ app.use(morgan("dev"));
 
 // API Routes
 app.use("/user", user);
-app.use("/portfolio",portfolioRoutes);
-app.use("/transplant",transplantRoutes);
-app.use("/organ",organRoutes);
+app.use("/portfolio", portfolioRoutes);
+app.use("/transplant", transplantRoutes);
+app.use("/organ", organRoutes);
 
 // Error Handling for Multer
 app.use((error, req, res, next) => {
