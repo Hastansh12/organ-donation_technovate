@@ -9,6 +9,7 @@ const path = require("path");
 const user = require("./Routes/user.routes");
 const portfolioRoutes=require('./Routes/portfolio.routes');
 const transplantRoutes=require('./Routes/transplant.routes');
+const organRoutes=require('./Routes/organ.routes');
 // Initializing an express app
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(morgan("dev"));
 app.use("/user", user);
 app.use("/portfolio",portfolioRoutes);
 app.use("/transplant",transplantRoutes);
+app.use("/organ",organRoutes);
 
 // Error Handling for Multer
 app.use((error, req, res, next) => {

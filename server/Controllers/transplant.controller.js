@@ -2,7 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const app = express();
-const Transplant=require('../Models/transplant.schema');
+const Transplant=require('../Models/transplant.model');
 app.use(express.json());
 
 const createtransplant=async(req,res)=>{
