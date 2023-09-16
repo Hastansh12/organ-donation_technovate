@@ -9,10 +9,10 @@ const portfolioSchema =new mongoose.Schema({
     gender:{type:String},
     age:{type:Number},
     weight:{type:Number},
-    dateOfBirth: { type: Date},
+    dateOfBirth: { type: String},
     organName:[{type:String}],
 })
 
-const Portfolio = mongoose.model('Portfolio', userSchema); //collection
+const Portfolio = mongoose.model('Portfolio', portfolioSchema); //collection
 
-module.exports = User;
+module.exports = Portfolio;
