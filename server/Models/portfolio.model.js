@@ -9,6 +9,7 @@ const portfolioSchema =new mongoose.Schema({
     gender:{type:String},
     age:{type:Number},
     weight:{type:Number},
+    height:{type:Number},
     dateOfBirth: { type: String},
     organName:[{type:String}],
 })
