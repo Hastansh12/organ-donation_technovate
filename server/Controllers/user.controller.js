@@ -53,12 +53,7 @@ const userLogin = async (req, res) => {
             }); //generating jwt
             userData.tokens = userData.tokens.concat({ token }); //saving token in tokens field of db
             await userData.save();
-            //sending verification mail
-            await sendEmail({
-                emailId: email,
-                subject: "Logged In",
-                message: "Verification mail for login on fantasyLeague",
-            });
+
             return res.status(200).json({ token: token, userData });
         }
     } catch (error) {
