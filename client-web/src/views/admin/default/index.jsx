@@ -15,8 +15,35 @@ import DailyTraffic from "views/admin/default/components/DailyTraffic";
 import TaskCard from "views/admin/default/components/TaskCard";
 import tableDataCheck from "./variables/tableDataCheck.json";
 import tableDataComplex from "./variables/tableDataComplex.json";
+import { useEffect } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useAuth } from "context/auth-context";
 
 const Dashboard = () => {
+  const { userPortfolio, setUserPortfolio } = useAuth();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const {
+          data: { portfolio, message },
+        } = await axios.get(`http://localhost:5000/portfolio`, {
+          withCredentials: true,
+        });
+
+        if (portfolio) {
+          setUserPortfolio(portfolio);
+        } else {
+          toast.error(message);
+        }
+      } catch (error) {
+        if (error.response?.data.message) {
+        }
+      }
+    })();
+  }, []);
+
   return (
     <div>
       {/* Card widget */}
@@ -24,33 +51,33 @@ const Dashboard = () => {
       <div className="mt-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-6">
         <Widget
           icon={<MdBarChart className="h-7 w-7" />}
-          title={"Earnings"}
-          subtitle={"$340.5"}
+          title={"Age (yrs)"}
+          subtitle={userPortfolio?.age ?? "NA"}
         />
         <Widget
           icon={<IoDocuments className="h-6 w-6" />}
-          title={"Spend this month"}
-          subtitle={"$642.39"}
+          title={"Weight (kgs)"}
+          subtitle={userPortfolio?.weight ?? "NA"}
         />
         <Widget
           icon={<MdBarChart className="h-7 w-7" />}
-          title={"Sales"}
-          subtitle={"$574.34"}
+          title={"Height (cm)"}
+          subtitle={userPortfolio?.height ?? "NA"}
+        />
+        <Widget
+          icon={<MdBarChart className="h-7 w-7" />}
+          title={"Organ Name"}
+          subtitle={userPortfolio?.organName ?? "NA"}
         />
         <Widget
           icon={<MdDashboard className="h-6 w-6" />}
-          title={"Your Balance"}
-          subtitle={"$1,000"}
-        />
-        <Widget
-          icon={<MdBarChart className="h-7 w-7" />}
-          title={"New Tasks"}
-          subtitle={"145"}
+          title={"Blood Group"}
+          subtitle={userPortfolio?.bloodGroup ?? "NA"}
         />
         <Widget
           icon={<IoMdHome className="h-6 w-6" />}
-          title={"Total Projects"}
-          subtitle={"$2433"}
+          title={"Gender"}
+          subtitle={userPortfolio?.gender ?? "NA"}
         />
       </div>
 

@@ -7,6 +7,7 @@ const AuthContext = createContext(defaultProviderValues);
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState("");
   const [userRole, setUserRole] = useState("");
+  const [userPortfolio, setUserPortfolio] = useState("");
   const [loading, setLoading] = useState(true);
 
   return (
@@ -18,6 +19,8 @@ export const AuthProvider = ({ children }) => {
         setUserRole,
         loading,
         setLoading,
+        userPortfolio,
+        setUserPortfolio,
       }}
     >
       {children}
