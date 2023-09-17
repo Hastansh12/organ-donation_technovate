@@ -19,6 +19,8 @@ import {
 } from "react-icons/md";
 import SignUp from "views/auth/Signup";
 import OrganForm from "views/OrganForm";
+import CompatabilityForm from "views/CompatabilityForm";
+import CompatibilityContainer from "views/admin/compatability/CompatabilityContainer";
 
 const routes = [
   {
@@ -44,19 +46,33 @@ const routes = [
   //   path: "data-tables",
   //   component: <DataTables />,
   // },
-  {
-    name: "Profile",
-    layout: "/admin",
-    path: "profile",
-    icon: <MdPerson className="h-6 w-6" />,
-    component: <Profile />,
-  },
+  // {
+  //   name: "Profile",
+  //   layout: "/admin",
+  //   path: "profile",
+  //   icon: <MdPerson className="h-6 w-6" />,
+  //   component: <Profile />,
+  // },
   {
     name: "Organ Form",
     layout: "/admin",
     path: "organ-form",
     icon: <MdPerson className="h-6 w-6" />,
     component: <OrganForm />,
+  },
+  {
+    name: "Compatibility Form",
+    layout: "/admin",
+    path: "compatibility-form",
+    icon: <MdPerson className="h-6 w-6" />,
+    component: <CompatabilityForm />,
+  },
+  {
+    name: "Hospital Portal",
+    layout: "/admin",
+    path: "hospital",
+    icon: <MdPerson className="h-6 w-6" />,
+    component: <CompatibilityContainer />,
   },
   {
     name: "Sign In",

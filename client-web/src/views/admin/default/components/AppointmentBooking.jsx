@@ -1,8 +1,10 @@
+import axios from "axios";
 import Card from "components/card";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker"; // You may need to install this package
 
 import "react-datepicker/dist/react-datepicker.css"; // Import the styles for the date picker
+import { toast } from "react-toastify";
 
 export default function AppointmentBooking() {
   const [name, setName] = useState("");
@@ -19,10 +21,31 @@ export default function AppointmentBooking() {
   ];
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can perform any necessary actions with the form data here
-    console.log("Form Data:", { name, email, selectedDate, selectedHospital });
+
+    try {
+      const {
+        data: { message },
+      } = await axios.post(
+        `http://localhost:5000/user/bookappointment`,
+        {
+          "User name": name,
+          "User email": email,
+          "Appointment date": selectedDate,
+          Hospital: selectedHospital,
+        },
+        { withCredentials: true }
+      );
+
+      if (message) {
+        toast.success(message);
+      } else {
+        toast.error(message);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
   };
 
   return (
@@ -36,7 +59,7 @@ export default function AppointmentBooking() {
               <div className="mb-4">
                 <label
                   htmlFor="name"
-                  className="block font-medium text-gray-800"
+                  className="block font-medium text-gray-800 dark:text-white"
                 >
                   Name:
                 </label>
@@ -53,7 +76,7 @@ export default function AppointmentBooking() {
               <div className="mb-4">
                 <label
                   htmlFor="email"
-                  className="block font-medium text-gray-800"
+                  className="block font-medium text-gray-800 dark:text-white"
                 >
                   Email:
                 </label>
@@ -70,7 +93,7 @@ export default function AppointmentBooking() {
               <div className="mb-4 w-full">
                 <label
                   htmlFor="date"
-                  className="block font-medium text-gray-800"
+                  className="block font-medium text-gray-800 dark:text-white"
                 >
                   Date:
                 </label>
@@ -88,7 +111,7 @@ export default function AppointmentBooking() {
               <div className="mb-4">
                 <label
                   htmlFor="hospital"
-                  className="block font-medium text-gray-800"
+                  className="block font-medium text-gray-800 dark:text-white"
                 >
                   Select a Hospital:
                 </label>

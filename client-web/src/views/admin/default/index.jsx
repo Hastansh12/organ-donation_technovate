@@ -176,7 +176,25 @@ const Dashboard = () => {
         {/* Task chart & Calendar */}
 
         <div className="grid grid-cols-1 gap-5 rounded-[20px] md:grid-cols-2">
-          <TaskCard />
+          {/* <TaskCard /> */}
+          <Card extra={"pt-3 w-full h-full sm:overflow-auto px-6"}>
+            <div>
+              <h2 class="text-2xl font-semibold">Risks and Considerations</h2>
+              <ul class="mt-4 list-inside list-decimal">
+                <li>
+                  Surgery Risks: Like any surgery, kidney donation carries some
+                  risks, including infection, bleeding, and anesthesia-related
+                  complications.
+                </li>
+
+                <li>
+                  Confidentiality: Donors' personal information is kept
+                  confidential, and they have the right to choose whether or not
+                  to disclose their donor status to others.
+                </li>
+              </ul>
+            </div>
+          </Card>
           <div className="grid grid-cols-1 rounded-[20px]">
             <MiniCalendar />
           </div>
