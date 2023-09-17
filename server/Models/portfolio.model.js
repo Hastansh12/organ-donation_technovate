@@ -10,6 +10,7 @@ const portfolioSchema =new mongoose.Schema({
     age:{type:Number},
     weight:{type:Number},
     height:{type:Number},
+    emergencyContact:{type:Number},
     dateOfBirth: { type: String},
     organName:[{type:String}],
 })

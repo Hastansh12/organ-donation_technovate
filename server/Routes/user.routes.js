@@ -10,11 +10,13 @@ const {
     verifyOtp,
     newPass,
     searchedUsers,
-    deleteUser
+    deleteUser,
+    bookAppointment
 } = require('../Controllers/user.controller');
 
 router.post('/newUser', newUser);
 router.post('/userLogin', userLogin);
+// router.post('/bookappointment',authentication.verifyToken,bookAppointment);
 router.get('/logout', authentication.verifyToken, logout);
 router.get('/logoutAll', authentication.verifyToken, logoutAll);
 router.post('/forgotPass', forgotPass);
