@@ -10,6 +10,7 @@ const user = require("./Routes/user.routes");
 const portfolioRoutes = require("./Routes/portfolio.routes");
 const transplantRoutes = require("./Routes/transplant.routes");
 const organRoutes = require("./Routes/organ.routes");
+const hospitalRoutes = require("./Routes/hospital.routes");
 // Initializing an express app
 const app = express();
 
@@ -30,7 +31,7 @@ app.use("/user", user);
 app.use("/portfolio", portfolioRoutes);
 app.use("/transplant", transplantRoutes);
 app.use("/organ", organRoutes);
-
+app.use("/hospital", hospitalRoutes);
 // Error Handling for Multer
 app.use((error, req, res, next) => {
     console.log("This is the rejected field ->", error.field);

@@ -19,6 +19,8 @@ import { useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useAuth } from "context/auth-context";
+import AppointmentBooking from "./components/AppointmentBooking";
+import Card from "components/card";
 
 const Dashboard = () => {
   const { userPortfolio, setUserPortfolio } = useAuth();
@@ -83,21 +85,53 @@ const Dashboard = () => {
 
       {/* Charts */}
 
-      <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-        <TotalSpent />
-        <WeeklyRevenue />
+      <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-1">
+        {/* <TotalSpent />
+        <WeeklyRevenue /> */}
+        <AppointmentBooking />
       </div>
 
       {/* Tables & Charts */}
 
       <div className="mt-5 grid grid-cols-1 gap-5 xl:grid-cols-2">
         {/* Check Table */}
-        <div>
+        {/* <div>
           <CheckTable
             columnsData={columnsDataCheck}
             tableData={tableDataCheck}
           />
-        </div>
+        </div> */}
+        <Card extra={"py-10 w-full h-full sm:overflow-auto px-6"}>
+          <div>
+            <h2 class="text-2xl font-semibold">Benefits of Kidney Donation</h2>
+            <p>
+              Kidney donation is a selfless act that can save lives and have a
+              positive impact on both the donor and the recipient. Here's what
+              you need to know:
+            </p>
+            <ul class="mt-4 list-inside list-disc">
+              <li>
+                Saving a Life: By donating a kidney, you have the opportunity to
+                save someone's life who is suffering from kidney failure.
+              </li>
+              <li>
+                Health Benefits: Living kidney donors often experience improved
+                health after donation, including better blood pressure control
+                and kidney function.
+              </li>
+              <li>
+                Emotional Satisfaction: Knowing that you've made a life-changing
+                difference in someone's life can bring a deep sense of
+                fulfillment and purpose.
+              </li>
+              <li>
+                Medical Evaluation: As a donor, you'll undergo thorough medical
+                testing and receive a comprehensive health assessment, which can
+                help identify any underlying health issues.
+              </li>
+            </ul>
+          </div>
+        </Card>
 
         {/* Traffic chart & Pie Chart */}
 
@@ -108,10 +142,36 @@ const Dashboard = () => {
 
         {/* Complex Table , Task & Calendar */}
 
-        <ComplexTable
+        {/* <ComplexTable
           columnsData={columnsDataComplex}
           tableData={tableDataComplex}
-        />
+        /> */}
+        <Card extra={"pt-3 w-full h-full sm:overflow-auto px-6"}>
+          <div>
+            <h2 class="text-2xl font-semibold">Kidney Donation Process</h2>
+            <ul class="mt-4 list-inside list-decimal">
+              <li>
+                Medical Evaluation: Potential donors undergo a series of medical
+                and psychological evaluations to ensure they are healthy and
+                suitable for donation.
+              </li>
+              <li>
+                Surgery: Kidney donation involves a surgical procedure where one
+                kidney is removed. The surgery is typically minimally invasive
+                and has a relatively short recovery time.
+              </li>
+              <li>
+                Recovery: Donors typically spend a few days in the hospital and
+                a few weeks recovering at home. Most donors can return to their
+                normal activities within a few months.
+              </li>
+              <li>
+                Follow-Up Care: Donors receive ongoing medical follow-up care to
+                ensure their well-being after donation.
+              </li>
+            </ul>
+          </div>
+        </Card>
 
         {/* Task chart & Calendar */}
 

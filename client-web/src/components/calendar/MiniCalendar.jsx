@@ -11,6 +11,7 @@ const MiniCalendar = () => {
   return (
     <div>
       <Card extra="flex w-full h-full flex-col px-3 py-3">
+        <h1 className="mb-2 text-2xl">Available dates: </h1>
         <Calendar
           onChange={onChange}
           value={value}

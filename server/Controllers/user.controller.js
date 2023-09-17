@@ -7,6 +7,7 @@ const dotenv = require("dotenv").config({ path: "src/.env" });
 const { sendEmail } = require("../utilities/functions");
 const SECRET_KEY = process.env.SECRET_KEY;
 const User = require("../Models/user.model");
+const Portfolio=require("../Models/portfolio.model");
 
 const newUser = async (req, res) => {
     try {
@@ -176,6 +177,23 @@ const deleteUser = async (req, res) => {
     }
 };
 
+const bookAppointment=async(req,res)=>{
+    try {
+        const user = userData;
+        const {email}=user.email;
+        let portfolio=await Portfolio.find({_id:user._id});
+        await sendEmail({
+        emailId: email,
+        subject: "Booking appointment Details",
+        message: `Your Booking is successful
+                  The details are :${req.body} 
+                  Portfolio: ${portfolio}`
+    });
+    res.status(200).json({message:'Email sent successfully'});
+    } catch (error) {
+        res.status(500).json({ message: error.message, task_status: "failed" });
+    }
+}
 module.exports = {
     deleteUser,
     newUser,
@@ -186,4 +204,5 @@ module.exports = {
     verifyOtp,
     newPass,
     searchedUsers,
+    bookAppointment
 };

@@ -1,15 +1,39 @@
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-const validator = require('validator');
-const bcrypt = require('bcrypt');
 
 const hospitalSchema = new mongoose.Schema({
-    name:{type:string,required:true},
-    location: { type: String, required: true },
-    contactEmail: { type: String, required: true },
-    contactPhone: { type: String, required: true },
-    // List of Transplants Performed
-    transplants: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Transplant' }],
-  });
-  
-  module.exports = mongoose.model('Hospital', hospitalSchema);
+  name: {
+    type: String,
+  },
+  registrationNumber: {
+    type: String,
+  },
+  isLicensed: {
+    type: Boolean,
+  },
+  licenseExpiryDate: Date,
+  accreditationStatus: {
+    type: String,
+    enum: ['Accredited', 'Not Accredited', 'Pending'],
+  },
+  accreditationExpiryDate: Date,
+  contactPerson: String,
+  contactEmail: String,
+  contactPhone: String,
+  address: String,
+  specialties: [String],
+  bedCapacity: Number,
+  emergencyServices: Boolean,
+  website: String,
+  lastVerificationDate: Date,
+  verificationStatus: {
+    type: String,
+    enum: ['Verified', 'Not Verified'],
+  },
+  verificationNotes: String, // Notes from the verification process
+  verificationDocuments: [{ type: String }], // Links or references to verification documents
+});
+
+const Hospital = mongoose.model('Hospital', hospitalSchema);
+
+module.exports = Hospital;
+
