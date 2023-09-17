@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import LinearGradient from 'react-native-linear-gradient';
-
+import { useNavigation } from '@react-navigation/native';
 const RequestOrgan = () => {
   const [urgency, setUrgency] = useState('Normal'); // Initial state: Normal
-
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Request Organ</Text>
