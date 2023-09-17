@@ -11,7 +11,7 @@ import {Header} from '../components/Header';
 import Menu from '../components/Menu';
 import SideMenu from '@chakrahq/react-native-side-menu';
 import {Category} from '../screens/Category';
-
+import MapView, { Marker } from 'react-native-maps';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faHome, faUser, faHeart,faMap,faMapMarked,faPlus,faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 
@@ -36,6 +36,8 @@ import RecipientMap from '../screens/RecipientMap';
 import RecipientHome from '../screens/RecipientHome';
 import RecipientProfile from '../screens/RecipientProfile';
 import RequestOrgan from '../screens/RequestOrgan';
+import AcceptPage from '../screens/AcceptPage';
+import GeneralMapView from '../screens/GeneralMapView';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -90,7 +92,21 @@ const ProfileTabs = () => {
     </CartStack.Navigator>
   );
 };
+const AcceptStack = createStackNavigator();
 
+
+const AcceptStackNav = () => {
+  return (
+    <AcceptStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <AcceptStack.Screen name="Home" component={RecipientHome} />
+      <AcceptStack.Screen name="Accept" component={AcceptPage} />
+      <AcceptStack.Screen name="MapView" component={GeneralMapView} />
+    </AcceptStack.Navigator>
+  );
+};
 const Tabs = ({navigation}) => {
   return (
     <>
@@ -101,7 +117,7 @@ const Tabs = ({navigation}) => {
 
         <Tab.Screen
           name="Home"
-          component={RecipientHome}
+          component={AcceptStackNav}
           options={{
             tabBarLabel: ({focused, color, size}) => (
               <Text
@@ -138,7 +154,7 @@ const Tabs = ({navigation}) => {
                   fontFamily: 'Poppins-Regular',
                   fontSize: 10,
                 }}>
-                Home
+                Request
               </Text>
             ),
             tabBarIcon: ({focused}) => (

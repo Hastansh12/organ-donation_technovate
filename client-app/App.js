@@ -12,5 +12,5 @@ export const App = () => {
     SplashScreen.hide();
   }, []);
 
-  return <Navigator />;
+  return <RecipientNav />;
 };

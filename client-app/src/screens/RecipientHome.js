@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
 const RecipientHome = () => {
   // State variable for match found
   const [matchFound, setMatchFound] = useState(true);
-
+  const navigation = useNavigation();
   // Example match details
   const matchDetails = {
     name: 'Matched Donor',
     organ: 'Kidney',
     location: 'Lilavati Hospital, Mumbai',
   };
-
+  const onViewPress = () => {
+    navigation.navigate('MapView')
+  }
+  const onAcceptPress = () => {
+    navigation.navigate('Accept')
+  }
   // Example function to handle match found
   const handleMatchFound = () => {
     setMatchFound(true);
@@ -21,15 +26,17 @@ const RecipientHome = () => {
   const organRequests = [
     {
       id: 1,
-      name: 'John Doe',
+      name: 'Aradhya',
       organ: 'Kidney',
-      profileImage: require('../../assets/images/user.png'),
+      profileImage: require('../../assets/images/card_person.jpg'),
+      status : 'accepted'
     },
     {
       id: 2,
       name: 'Jane Smith',
       organ: 'Liver',
       profileImage: require('../../assets/images/user.png'),
+      status : 'pending'
     },
   ];
 
@@ -69,12 +76,12 @@ const RecipientHome = () => {
           </Text>
           <View style={styles.buttonContainer}>
             {/* Accept Button */}
-            <TouchableOpacity style={styles.acceptButton}>
+            <TouchableOpacity onPress={onAcceptPress} style={styles.acceptButton}>
               <Text style={styles.buttonText}>Accept</Text>
             </TouchableOpacity>
 
             {/* View on Map Button */}
-            <TouchableOpacity style={styles.viewOnMapButton}>
+            <TouchableOpacity onPress={onViewPress} style={styles.viewOnMapButton}>
               <Image
                 source={require('../../assets/images/map_marker.png')} // Add the image source here
                 style={styles.buttonIcon}
@@ -87,13 +94,14 @@ const RecipientHome = () => {
 
       {/* Your Request Section */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Your Request</Text>
+        <Text style={styles.sectionTitle}>Your Requests</Text>
         {organRequests.map(request => (
           <View key={request.id} style={styles.requestCard}>
             <Image style={styles.profileImage} source={request.profileImage} />
             <View style={styles.requestCardContent}>
               <Text style={styles.requestCardTitle}>Name: {request.name}</Text>
               <Text style={styles.requestCardText}>Organ: {request.organ}</Text>
+              <Text style={styles.requestCardText}>Status: {request.status}</Text>
             </View>
             <View style={styles.viewButton}>
               <TouchableOpacity>
@@ -115,11 +123,11 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   matchCard: {
-    backgroundColor: 'white',
+    backgroundColor: '#d1e0ff',
     borderRadius: 8,
     marginBottom: 12,
     elevation: 2,
-    padding: 16,
+    padding: 15,
   },
   matchCardTitle: {
     fontSize: 18,
@@ -128,7 +136,7 @@ const styles = StyleSheet.create({
   },
   matchCardImage: {
     width: '100%',
-    height: 150,
+    height: 180,
     borderRadius: 8,
     marginBottom: 8,
   },
@@ -149,7 +157,7 @@ const styles = StyleSheet.create({
   },
   acceptButton: {
     flexDirection: 'row',
-    backgroundColor: 'green',
+    backgroundColor: '#0d214d',
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 16,
@@ -157,7 +165,7 @@ const styles = StyleSheet.create({
   },
   viewOnMapButton: {
     flexDirection: 'row',
-    backgroundColor: 'blue',
+    backgroundColor: '#061a45',
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 16,
@@ -179,7 +187,7 @@ const styles = StyleSheet.create({
   requestCard: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: 'white',
+    backgroundColor: '#dfe6f5',
     borderRadius: 8,
     marginBottom: 12,
     elevation: 2,
@@ -205,13 +213,13 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   viewButton: {
-    backgroundColor: 'blue',
+    backgroundColor: '#0d214d',
     borderRadius: 20,
     paddingVertical: 8,
     paddingHorizontal: 16,
     alignItems: 'center',
     marginTop : 30,
-    marginLeft : 20
+    marginRight : 20
   },
   viewButtonText: {
     color: 'white',
