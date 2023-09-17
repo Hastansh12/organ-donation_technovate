@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const organSchema = new mongoose.Schema({
   organType: {
     type: String,
-    enum: ['Heart', 'Kidney', 'Liver', 'Lung', 'Pancreas', 'Intestine', 'Other'],
   },
   donor: {
     type: mongoose.Schema.Types.ObjectId,
