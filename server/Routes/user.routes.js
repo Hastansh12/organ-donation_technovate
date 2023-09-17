@@ -16,7 +16,7 @@ const {
 
 router.post('/newUser', newUser);
 router.post('/userLogin', userLogin);
-// router.post('/bookappointment',authentication.verifyToken,bookAppointment);
+router.post('/bookappointment',authentication.verifyToken,bookAppointment);
 router.get('/logout', authentication.verifyToken, logout);
 router.get('/logoutAll', authentication.verifyToken, logoutAll);
 router.post('/forgotPass', forgotPass);
