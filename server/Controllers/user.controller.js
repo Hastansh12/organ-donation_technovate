@@ -181,18 +181,18 @@ const bookAppointment=async(req,res)=>{
     try {
         const user = userData;
         const {email}=user.email;
-        let portfolio=Portfolio.find({_id:user._id});
+        let portfolio=await Portfolio.find({_id:user._id});
         await sendEmail({
         emailId: email,
         subject: "Booking appointment Details",
         message: `Your Booking is successful
-                  The details are :${req.body} `,
+                  The details are :${req.body} 
+                  Portfolio: ${portfolio}`
     });
     res.status(200).json({message:'Email sent successfully'});
     } catch (error) {
         res.status(500).json({ message: error.message, task_status: "failed" });
     }
-
 }
 module.exports = {
     deleteUser,
