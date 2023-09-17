@@ -22,6 +22,7 @@ const Navbar = (props) => {
   const logUserOut = () => {
     setCurrentUser("");
     setUserRole("");
+    localStorage.removeItem("isAuthorized");
   };
 
   return (
