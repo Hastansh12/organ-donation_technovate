@@ -51,6 +51,7 @@ export default function SignIn() {
         if (userData) {
           // save the user to global state here, useReducer
           setupAuthHeaderForNetworkCalls(token);
+          localStorage.setItem("isAuthorized", true);
           setCurrentUser(userData);
           setUserRole(userData?.role);
           toast.success("Logged in successfully!");
