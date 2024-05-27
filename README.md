@@ -1,4 +1,7 @@
 # OrganConnect
+## Name: Hastansh Pandit
+## Department: AIML Third Year 
+
 
 OrganConnect is a revolutionary application designed to bridge the gap between organ donors and individuals in need of life-saving organs. Leveraging a special compatibility metric, OrganConnect goes beyond traditional matching methods by filtering organ donors based on specific criteria, ensuring a higher likelihood of successful organ transplants.
 
@@ -55,3 +58,14 @@ OrganConnect is designed to be user-friendly. Users can:
 - Communicate with matched users through the app
 
 The intuitive interface ensures a smooth experience for both organ donors and recipients.
+
+![image](https://github.com/Hastansh12/organ-donation_technovate/assets/55392536/2bbc27c5-a957-41d1-8d20-176747fe03cf)
+![image](https://github.com/Hastansh12/organ-donation_technovate/assets/55392536/2d618400-0194-4375-a6f8-bf39089e435b)
+![image](https://github.com/Hastansh12/organ-donation_technovate/assets/55392536/8df00822-206a-405a-9488-3cdd740c2785)
+![image](https://github.com/Hastansh12/organ-donation_technovate/assets/55392536/3483b1e5-fd00-4c7e-a0ed-ca81be8a6271)
+![image](https://github.com/Hastansh12/organ-donation_technovate/assets/55392536/696e49f5-b380-406c-9f80-12861db905b2)
+
+
+
+
+
